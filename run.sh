@@ -37,3 +37,29 @@ HttpConfig() {
 
 echo "Configuring Apache web server..."
 HttpConfig
+
+
+SSLConfig() {
+    sudo mkdir -p /etc/ssl/private
+
+    sudo openssl req -x509 -nodes -days 60 -newkey rsa:2048 \
+        -keyout /etc/ssl/private/apache-selfsigned.key \
+        -out /etc/ssl/certs/apache-selfsigned.crt \
+        -subj "/C=PS/ST=Nablus/L=Nablus/O=LinuxTask/CN=localhost"
+
+    sudo dnf install -y mod_ssl
+
+    sudo bash -c 'cat > /etc/httpd/conf.d/ssl.conf <<EOF
+<VirtualHost *:443>
+    DocumentRoot "/var/www/html"
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+</VirtualHost>
+EOF'
+
+    sudo systemctl restart httpd
+}
+
+echo " configuring SSL called now in progress "
+SSLConfig
