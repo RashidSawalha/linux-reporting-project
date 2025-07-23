@@ -26,3 +26,14 @@ echo " Disk mount called now in progress "
 DiskMount
 
 
+HttpConfig() {
+    echo " Enabling and starting Apache HTTP server..."
+    sudo systemctl enable --now httpd
+
+    echo "Creating status.html page..."
+    echo "<h1>Status: Server is running</h1>" | sudo tee /var/www/html/status.html > /dev/null
+}
+
+
+echo "Configuring Apache web server..."
+HttpConfig
