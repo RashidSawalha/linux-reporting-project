@@ -5,10 +5,10 @@ echo "welcome to Linux reporting system, starting system setup "
 echo " Downloading needed packages "
 sudo dnf install -y git httpd firewalld
 
-echo " pulling  lastest version of the repository "
-cd /opt/linux-reporting-project
-sudo git reset --hard HEAD
-sudo git pull origin main
+#echo " pulling  lastest version of the repository "
+#cd /opt/linux-reporting-project
+#sudo git reset --hard HEAD
+#sudo git pull origin main
 
 
 
@@ -40,6 +40,7 @@ HttpConfig
 
 
 SSLConfig() {
+    
     sudo mkdir -p /etc/ssl/private
 
     sudo openssl req -x509 -nodes -days 60 -newkey rsa:2048 \
@@ -50,6 +51,8 @@ SSLConfig() {
     sudo dnf install -y mod_ssl
 
     sudo bash -c 'cat > /etc/httpd/conf.d/ssl.conf <<EOF
+
+    Listen 443 https
 <VirtualHost *:443>
     DocumentRoot "/var/www/html"
     SSLEngine on
@@ -86,3 +89,18 @@ GenerateReport() {
 
 echo "Generating system report in HTML" 
 GenerateReport
+
+ArchiveReports() {
+    cp /var/www/html/status.html /mnt/metrics/status_$(date +%Y%m%d%H%M%S).html
+    HOUR=$(date +%H)
+    MIN=$(date +%M)
+    if (( MIN == 0 && HOUR % 3 == 0 )); then
+        mkdir -p /backups
+        tar -czf /backups/reports_$(date +%Y%m%d%H%M%S).tar.gz -C /mnt/metrics .
+    fi
+}
+
+
+echo " Archiving HTML report "
+
+ArchiveReports
