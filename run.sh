@@ -63,3 +63,26 @@ EOF'
 
 echo " configuring SSL called now in progress "
 SSLConfig
+
+
+GenerateReport() {
+    {
+        echo "<html><body>"
+
+        echo "<h2>Hostname:</h2><p>$(hostname)</p>"
+        echo "<h2>IP Address:</h2><p>$(hostname -I | awk '{print \$1}')</p>"
+        echo "<h2>Current Time:</h2><p>$(date)</p>"
+
+        echo "<h2>CPU Usage:</h2><pre>$(top -bn1 | grep '%Cpu')</pre>"
+        echo "<h2>Memory Usage:</h2><pre>$(free -h)</pre>"
+        echo "<h2>Disk Usage:</h2><pre>$(df -h)</pre>"
+
+        echo "<h2>Top 5 Running Processes:</h2>"
+        echo "<pre>$(ps -eo pid,comm,%mem,%cpu --sort=-%cpu | head -n 6)</pre>"
+
+        echo "</body></html>"
+    } | sudo tee /var/www/html/status.html > /dev/null
+}
+
+echo "Generating system report in HTML" 
+GenerateReport
