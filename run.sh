@@ -104,3 +104,17 @@ ArchiveReports() {
 echo " Archiving HTML report "
 
 ArchiveReports
+ 
+FirewallRules(){
+
+   	sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="192.168.2.0/24" port port="443" protocol="tcp" accept' --permanent
+	sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.3.10" port port="443" protocol="tcp" reject'
+	sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.3.0/24" port port="443" protocol="tcp" reject'
+
+ 	
+	sudo firewall-cmd --reload
+
+}
+
+echo "applying firewall  Rule "
+FirewallRules
