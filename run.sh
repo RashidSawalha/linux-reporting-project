@@ -5,6 +5,7 @@ echo "welcome to Linux reporting system, starting system setup "
 echo " Downloading needed packages "
 sudo dnf install -y git httpd firewalld
 
+
 #echo " pulling  lastest version of the repository "
 #cd /opt/linux-reporting-project
 #sudo git reset --hard HEAD
@@ -91,11 +92,12 @@ echo "Generating system report in HTML"
 GenerateReport
 
 ArchiveReports() {
+
+    sudo mkdir -p /backups
     cp /var/www/html/status.html /mnt/metrics/status_$(date +%Y%m%d%H%M%S).html
     HOUR=$(date +%H)
     MIN=$(date +%M)
     if (( MIN == 0 && HOUR % 3 == 0 )); then
-        mkdir -p /backups
         tar -czf /backups/reports_$(date +%Y%m%d%H%M%S).tar.gz -C /mnt/metrics .
     fi
 }
@@ -118,3 +120,22 @@ FirewallRules(){
 
 echo "applying firewall  Rule "
 FirewallRules
+
+
+PermissionsOwnershipScript(){
+
+	echo " setting Permissions & Ownership "
+
+	sudo useradd -r -s /sbin/nologin reporter
+	
+	sudo chown reporter:reporter /mnt/metrics /backups
+	sudo chmod 750 /mnt/metrics /backups
+
+	sudo chown reporter:reporter "$0"
+	sudo chmod 700 "$0"
+
+}
+
+
+PermissionsOwnershipScript
+
