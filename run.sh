@@ -1,5 +1,5 @@
 
-chmod +x *.sh
+
 
 echo " welcome to Harri reporting system :D "
 
@@ -10,17 +10,14 @@ sudo dnf install -y git
 
 echo " calling disk mount"
 
-/opt/linux-reporting-project/disk_mount.sh
+./disk_mount.sh
 
 echo " calling httpd config"
-./httpdconfig.sh
+./httpd_config.sh
 
 echo " calling ssl config"
-./sslconfig.sh
+./ssl_config.sh
 
-#echo " configuring firewall rules"
-#/opt/linux-reporting-project/firewallconfig.sh
+echo "Setting up cron job "
 
-
-echo "Setting up cron jobs..."
-/opt/linux-reporting-project/CronJob.sh
+./cronjob_config.sh
