@@ -13,6 +13,7 @@ git clone https://github.com/RashidSawalha/linux-reporting-project.git
 then you need to run this command 
 to make the file executable 
 using ( chmod +x filename.sh )
+( you need to do this for all the files to make sure the project works and not get permission problems) 
 
 
 now to run the project you need to use the following commands 
