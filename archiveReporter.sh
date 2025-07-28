@@ -1,16 +1,13 @@
 
 
 
-echo "Archiving reports"
-
-REPORT_DIR="/mnt/metrics"
+JSON_DIR="/mnt/metrics"
 ARCHIVE_DIR="/backups"
-TIMESTAMP=$(date +%s)
-ARCHIVE_NAME="status_${TIMESTAMP}.tar.gz"
 
-mkdir -p "$ARCHIVE_DIR"
+unix_timestamp=$(date +%s)
 
-tar -czf "$ARCHIVE_DIR/$ARCHIVE_NAME" -C "$REPORT_DIR" .
+mv "$JSON_DIR"/status_*.json "$ARCHIVE_DIR"/
+tar -czf "$ARCHIVE_DIR/status_${unix_timestamp}.tar.gz" -C "$ARCHIVE_DIR" status_*.json
+rm -f "$ARCHIVE_DIR"/status_*.json
 
-echo "Report archived at $ARCHIVE_DIR/$ARCHIVE_NAME"
-
+echo "Archived JSON files at $ARCHIVE_DIR/status_${unix_timestamp}.tar.gz"

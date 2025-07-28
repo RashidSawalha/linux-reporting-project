@@ -13,5 +13,9 @@ if ! id "reporter" &>/dev/null; then
     sudo useradd -r -s /sbin/nologin reporter
 fi
 
+sudo chown -R root:root /opt/linux-reporting-project
+sudo chmod 750 /opt/linux-reporting-project/*.sh
+
+
 sudo chown reporter:reporter /mnt/metrics /backups
 sudo chmod 750 /mnt/metrics /backups
