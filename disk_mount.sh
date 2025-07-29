@@ -15,9 +15,15 @@ echo "UUID=$UUID /mnt/metrics ext4 defaults,uid=$(id -u reporter),gid=$(id -g re
 sudo mkdir -p /backups
 
 if ! id "reporter" &>/dev/null; then
+    sudo mkdir /home/reporter
     sudo useradd -r -s /sbin/nologin reporter
+    sudo chown -R reporter:reporter /home/reporter
+    
 fi
 
 sudo chown -R reporter:reporter /opt/linux-reporting-project /mnt/metrics /backups
 sudo chmod +x /opt/linux-reporting-project/*.sh
+
+
+
 
