@@ -1,6 +1,7 @@
+#!/bin/bash
+
+
 echo " Downloading firewall packages "
-
-
 sudo dnf install -y firewalld
 
 sudo systemctl enable firewalld

@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 
 echo " welcome to Harri reporting system :D "
@@ -16,6 +16,9 @@ echo " calling httpd config"
 
 echo " calling ssl config"
 ./ssl_config.sh
+
+echo "  generating report "
+./generate_report.sh
 
 echo "Setting up cron job "
 

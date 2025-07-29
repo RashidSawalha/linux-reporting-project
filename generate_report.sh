@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 UNIX_TIMESTAMP=$(date +%s)
 FORMATTED_DATE=$(date -d @"$UNIX_TIMESTAMP" "+%Y-%m-%d %H:%M:%S")

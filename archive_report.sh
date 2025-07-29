@@ -1,5 +1,4 @@
-
-
+#!/bin/bash
 
 JSON_DIR="/mnt/metrics"
 ARCHIVE_DIR="/backups"
