@@ -9,6 +9,9 @@ using ( git clone )
 
 git clone https://github.com/RashidSawalha/linux-reporting-project.git
 
+cd /( the location you cloned the project in )/linux-reporting-project
+sudo mv /( the location you cloned the project in )/linux-reporting-project /opt/
+
 
 then you need to run this command 
 to make the file executable 
