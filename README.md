@@ -1,36 +1,40 @@
-# linux-reporting-project
-
-welcome to harri reporting system 
-
-to run this project you need to follow the following steps 
-
-first clone this project to your Device 
-using ( git clone )
-
-git clone https://github.com/RashidSawalha/linux-reporting-project.git
-
-cd /( the location you cloned the project in )/linux-reporting-project
-
-sudo mv /( the location you cloned the project in )/linux-reporting-project /opt/
+ # welcome to harri reporting system :D
 
 
-then you need to run this command 
-to make the file executable 
-using ( chmod +x filename.sh )
-( you need to do this for all the files to make sure the project works and not get permission problems) 
+### to run this project
+ you need to follow the following steps
 
+### first you need to download git packages using the following command
 
-now to run the project you need to use the following commands 
+```bash
+sudo dnf install -y git
 
-first make the run.sh executable 
-using chmod 
+```
+### after installing git packages, clone this project to your Device using ( git clone )
 
-chmod +x run.sh
+```bash
+sudo git clone -b master https://github.com/RashidSawalha/linux-reporting-project.git /opt/linux-reporting-project
+```
+### now you need to change the ownership to make sure the commands work perfectly
+```bash
+sudo chown -R $(whoami):$(whoami) /opt/linux-reporting-project
 
-then 
+cd /opt/linux-reporting-project
+```
 
-use this command to make the project work 
+then you need to run this command to make the file executable using ( chmod +x filename.sh ) ( you need to do this for all the files to make sure the project works and not get permission problems)
+
+### now to run the project you need to use the following commands
+
+```bash
+chmod +x archive_report.sh cronjob_config.sh disk_mount.sh generate_report.sh httpd_config.sh run.sh ssl_config.sh
+```
+then
+
+### use this command to make the project work
+```bash
+
 
 ./run.sh
 
-
+```
