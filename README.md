@@ -18,6 +18,8 @@ sudo git clone -b master https://github.com/RashidSawalha/linux-reporting-projec
 ### now you need to change the ownership to make sure the commands work perfectly
 ```bash
 sudo chown -R $(whoami):$(whoami) /opt/linux-reporting-project
+
+cd /opt/linux-reporting-project
 ```
 
 then you need to run this command to make the file executable using ( chmod +x filename.sh ) ( you need to do this for all the files to make sure the project works and not get permission problems)
